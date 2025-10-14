@@ -1,31 +1,10 @@
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: whanos-java
-spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: whanos-java
-  template:
-    metadata:
-      labels:
-        app: whanos-java
-    spec:
-      containers:
-      - name: whanos-java
-        image: whanos-java-standalone:latest
-        ports:
-        - containerPort: 8080
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: whanos-java-service
-spec:
-  selector:
-    app: whanos-java
-  ports:
-  - protocol: TCP
-    port: 80
-    targetPort: 8080
+deployment:
+  replicas: 2
+  ports: [8080]
+  resources:
+    requests:
+      cpu: "200m"
+      memory: "256Mi"
+    limits:
+      cpu: "1"
+      memory: "512Mi"
